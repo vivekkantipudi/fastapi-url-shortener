@@ -54,10 +54,25 @@ cd D:\url_shortener
 
 # Create and activate virtual environment
 python -m venv venv
-venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
+venv\Scrpts\activate
 ```
+3. Run the Application
+```bash
+uvicorn main:app --reload
+```
+The server will start at http://127.0.0.1:8000.
+# Short Code Generation Strategy
+This system uses Base62 Encoding based on the Database Auto-Increment ID
+Unique Mapping: Each long URL is assigned a unique integer ID by MySQL.
+Encoding: That ID is converted into a string using a character set of [0-9][a-z][A-Z].
+Collision Handling: Because every database ID is unique, code collisions are mathematically impossible. No secondary "check-if-exists" loop is required.
+
+# Testing Order
+POST /api/shorten: Create a short code for a long URL.
+
+GET /{short_code}: Visit the code in your browser to trigger a redirect.
+
+GET /api/stats/{short_code}: Verify the click was recorded in the analytics.
+
 
 
