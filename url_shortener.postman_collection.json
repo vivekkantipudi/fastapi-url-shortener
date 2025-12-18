@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-4g7h-8i9j-k0l1m2n3o4p5",
+		"name": "URL Shortener System",
+		"description": "A complete collection for testing the FastAPI URL Shortener service, including link creation, redirection tracking, and analytics.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Shorten URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"original_url\": \"https://www.google.com\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/shorten",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"shorten"
+					]
+				},
+				"description": "Sends a long URL to the server and receives a 6-8 character unique short code."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Redirect (Click)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/:short_code",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						":short_code"
+					],
+					"variable": [
+						{
+							"key": "short_code",
+							"value": "ENTER_CODE_HERE",
+							"description": "The alphanumeric code returned by the /shorten endpoint"
+						}
+					]
+				},
+				"description": "Simulates a user clicking the link. This will return a 302 Redirect. In Postman, check the 'Headers' tab of the response to see the Location."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Get Analytics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/stats/:short_code",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"stats",
+						":short_code"
+					],
+					"variable": [
+						{
+							"key": "short_code",
+							"value": "ENTER_CODE_HERE"
+						}
+					]
+				},
+				"description": "Returns the total number of times the short link has been accessed."
+			},
+			"response": []
+		}
+	]
+}
