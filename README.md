@@ -60,7 +60,7 @@ venv\Scrpts\activate
 ```bash
 uvicorn main:app --reload
 ```
-The server will start at http://127.0.0.1:8000.
+The server will start at http://127.0.0.1:8000/docs.
 # Short Code Generation Strategy
 This system uses Base62 Encoding based on the Database Auto-Increment ID
 Unique Mapping: Each long URL is assigned a unique integer ID by MySQL.
