@@ -2,7 +2,7 @@ import string
 from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+from pydantic import BaseModel, HttpUrl
 import database, models
 
 # Initialize Database Tables automatically
@@ -11,7 +11,7 @@ models.Base.metadata.create_all(bind=database.engine)
 app = FastAPI()
 
 class URLCreate(BaseModel):
-    original_url: str
+    original_url: HttpUrl
 
 def get_db():
     db = database.SessionLocal()
